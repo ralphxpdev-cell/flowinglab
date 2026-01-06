@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="FLOWINGLAB - 브랜딩, 커머스, MCN을 아우르는 크리에이티브 그룹">
+    <title>FLOWINGLAB — We make it flow</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Intro Curtain -->
+    <div class="intro-curtain" id="introCurtain">
+        <div class="curtain-top"></div>
+        <div class="curtain-bottom"></div>
+        <div class="intro-logo">FLOWINGLAB</div>
+    </div>
+
+    <!-- Noise Overlay -->
+    <div class="noise"></div>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="logo">FLOWINGLAB</div>
+        <nav class="nav-menu">
+            <a href="#" class="nav-link" data-section="1">About</a>
+            <a href="#" class="nav-link" data-section="2">Business</a>
+            <a href="#" class="nav-link" data-section="6">Portfolio</a>
+            <a href="#" class="nav-link" data-section="7">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Horizontal Container -->
+    <div class="horizontal-wrapper">
+        <div class="horizontal-container" id="container">
+
+            <!-- 1. Hero -->
+            <section class="section hero-section">
+                <div class="hero-bg">
+                    <div class="hero-bg-image">
+                        <span class="image-placeholder">Background Video / Image</span>
+                    </div>
+                </div>
+                <div class="hero-content">
+                    <h1 class="hero-title" id="heroTitle">
+                        <span>FLOWING</span><span>LAB</span>
+                    </h1>
+                    <p class="hero-tagline" id="heroTagline">Let us flow</p>
+                    <p class="hero-sub" id="heroSub">Branding · Commerce · MCN</p>
+                </div>
+                <div class="hero-scroll" id="heroScroll">
+                    <span class="hero-scroll-text">Scroll</span>
+                    <div class="hero-scroll-line"></div>
+                </div>
+            </section>
+
+            <!-- 2. About -->
+            <section class="section about-section">
+                <div class="about-left">
+                    <p class="about-label">About Us</p>
+                    <h2 class="about-title">
+                        <span class="line"><span>브랜드가 흐르는</span></span>
+                        <span class="line"><span>모든 순간을</span></span>
+                        <span class="line"><span>만듭니다</span></span>
+                    </h2>
+                    <p class="about-desc">
+                        플로잉랩은 브랜딩, 커머스, 크리에이터 네트워크를 아우르는
+                        크리에이티브 그룹입니다.
+                    </p>
+                    <p class="about-desc">
+                        브랜드의 시작부터 성장까지, 모든 과정이 자연스럽게
+                        흐를 수 있도록 돕습니다.
+                    </p>
+                </div>
+                <div class="about-right">
+                    <div class="about-images" id="aboutImages">
+                        <div class="about-image">
+                            <span class="image-placeholder">About Image 01</span>
+                        </div>
+                        <div class="about-image">
+                            <span class="image-placeholder">About Image 02</span>
+                        </div>
+                        <div class="about-image">
+                            <span class="image-placeholder">About Image 03</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. Business -->
+            <section class="section business-section">
+                <div class="business-wrapper">
+                    <div class="business-header">
+                        <p class="business-label">What We Do</p>
+                        <h2 class="business-title">BUSINESS</h2>
+                    </div>
+                    <div class="business-grid">
+                        <div class="business-card">
+                            <span class="business-card-number">01</span>
+                            <h3 class="business-card-title">BRANDING</h3>
+                            <p class="business-card-desc">
+                                브랜드 전략부터 아이덴티티 디자인,
+                                웹/앱 개발까지 브랜드에 필요한 모든 것
+                            </p>
+                            <div class="business-card-tags">
+                                <span class="business-card-tag">컨설팅</span>
+                                <span class="business-card-tag">디자인</span>
+                                <span class="business-card-tag">개발</span>
+                            </div>
+                        </div>
+                        <div class="business-card">
+                            <span class="business-card-number">02</span>
+                            <h3 class="business-card-title">COMMERCE</h3>
+                            <p class="business-card-desc">
+                                전자상거래 구축 및 운영,
+                                인플루언서 공구 매칭 및 진행
+                            </p>
+                            <div class="business-card-tags">
+                                <span class="business-card-tag">이커머스</span>
+                                <span class="business-card-tag">공구</span>
+                                <span class="business-card-tag">MD</span>
+                            </div>
+                        </div>
+                        <div class="business-card">
+                            <span class="business-card-number">03</span>
+                            <h3 class="business-card-title">MCN</h3>
+                            <p class="business-card-desc">
+                                크리에이터 네트워크 운영,
+                                공급사-인플루언서 매칭
+                            </p>
+                            <div class="business-card-tags">
+                                <span class="business-card-tag">크리에이터</span>
+                                <span class="business-card-tag">매칭</span>
+                                <span class="business-card-tag">매니지먼트</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4. Branding -->
+            <section class="section branding-section">
+                <div class="branding-left">
+                    <p class="branding-label">Branding Agency</p>
+                    <h2 class="branding-title">BRANDING</h2>
+                    <p class="branding-desc">
+                        브랜드의 본질을 발견하고, 세상에 전달합니다.
+                        전략부터 디자인, 개발까지 원스톱으로 진행합니다.
+                    </p>
+                    <div class="branding-services">
+                        <span class="branding-service">Brand Strategy</span>
+                        <span class="branding-service">Identity Design</span>
+                        <span class="branding-service">Web/App Development</span>
+                        <span class="branding-service">Marketing</span>
+                    </div>
+                </div>
+                <div class="branding-right">
+                    <div class="branding-image">
+                        <span class="image-placeholder">브랜딩 작업 01</span>
+                    </div>
+                    <div class="branding-image">
+                        <span class="image-placeholder">브랜딩 작업 02</span>
+                    </div>
+                    <div class="branding-image">
+                        <span class="image-placeholder">브랜딩 작업 03</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5. Commerce -->
+            <section class="section commerce-section">
+                <div class="commerce-left">
+                    <div class="commerce-image">
+                        <span class="image-placeholder">커머스 이미지 01</span>
+                    </div>
+                    <div class="commerce-image">
+                        <span class="image-placeholder">커머스 이미지 02</span>
+                    </div>
+                    <div class="commerce-image">
+                        <span class="image-placeholder">커머스 이미지 03</span>
+                    </div>
+                    <div class="commerce-image">
+                        <span class="image-placeholder">커머스 이미지 04</span>
+                    </div>
+                </div>
+                <div class="commerce-right">
+                    <p class="commerce-label">E-Commerce & Group Buying</p>
+                    <h2 class="commerce-title">COMMERCE</h2>
+                    <p class="commerce-desc">
+                        자체 커머스 운영부터 인플루언서 공구까지.
+                        제품이 고객에게 닿는 모든 경로를 만듭니다.
+                    </p>
+                    <ul class="commerce-list">
+                        <li>자체 이커머스 운영</li>
+                        <li>공급사-인플루언서 매칭</li>
+                        <li>공구 기획 및 운영</li>
+                        <li>상세페이지 제작</li>
+                        <li>퍼포먼스 마케팅</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- 6. MCN/Partnership -->
+            <section class="section mcn-section">
+                <div class="mcn-header">
+                    <p class="mcn-label">Creator Partnership</p>
+                    <h2 class="mcn-title">PARTNERSHIP</h2>
+                </div>
+                <div class="mcn-grid">
+                    <div class="mcn-card">
+                        <span class="image-placeholder">협업 크리에이터 01</span>
+                        <div class="mcn-card-overlay"></div>
+                        <div class="mcn-card-info">
+                            <p class="mcn-card-name">Creator 01</p>
+                            <p class="mcn-card-role">진행 사례</p>
+                        </div>
+                    </div>
+                    <div class="mcn-card">
+                        <span class="image-placeholder">협업 크리에이터 02</span>
+                        <div class="mcn-card-overlay"></div>
+                        <div class="mcn-card-info">
+                            <p class="mcn-card-name">Creator 02</p>
+                            <p class="mcn-card-role">진행 사례</p>
+                        </div>
+                    </div>
+                    <div class="mcn-card">
+                        <span class="image-placeholder">협업 크리에이터 03</span>
+                        <div class="mcn-card-overlay"></div>
+                        <div class="mcn-card-info">
+                            <p class="mcn-card-name">Creator 03</p>
+                            <p class="mcn-card-role">진행 사례</p>
+                        </div>
+                    </div>
+                    <div class="mcn-card">
+                        <span class="image-placeholder">협업 크리에이터 04</span>
+                        <div class="mcn-card-overlay"></div>
+                        <div class="mcn-card-info">
+                            <p class="mcn-card-name">Creator 04</p>
+                            <p class="mcn-card-role">진행 사례</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 7. Portfolio -->
+            <section class="section portfolio-section">
+                <div class="portfolio-left">
+                    <p class="portfolio-label">Our Works</p>
+                    <h2 class="portfolio-title">PORTFOLIO</h2>
+                    <p class="portfolio-desc">
+                        다양한 분야의 브랜딩, 디자인, 커머스
+                        프로젝트를 진행해왔습니다.
+                    </p>
+                    <button class="portfolio-btn">
+                        View All Works
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                </div>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <span class="image-placeholder">프로젝트 01</span>
+                        <div class="portfolio-item-overlay">
+                            <span class="portfolio-item-title">Project 01</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <span class="image-placeholder">프로젝트 02</span>
+                        <div class="portfolio-item-overlay">
+                            <span class="portfolio-item-title">Project 02</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <span class="image-placeholder">프로젝트 03</span>
+                        <div class="portfolio-item-overlay">
+                            <span class="portfolio-item-title">Project 03</span>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <span class="image-placeholder">프로젝트 04</span>
+                        <div class="portfolio-item-overlay">
+                            <span class="portfolio-item-title">Project 04</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 8. Contact -->
+            <section class="section contact-section">
+                <div class="contact-bg">CONTACT</div>
+                <div class="contact-wrapper">
+                    <p class="contact-label">Let's Work Together</p>
+                    <h2 class="contact-title">
+                        GET IN<br>
+                        <span class="outline">TOUCH</span>
+                    </h2>
+                    <p class="contact-desc">
+                        브랜딩, 커머스, 파트너십 등<br>
+                        무엇이든 편하게 문의해주세요.
+                    </p>
+                    <div class="contact-buttons">
+                        <a href="#" class="contact-btn primary">
+                            프로젝트 문의
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12h14M12 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="contact-btn secondary">
+                            파트너십 제안
+                        </a>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-info-item">
+                            <p class="contact-info-label">Email</p>
+                            <p class="contact-info-value">hello@flowinglab.co</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <p class="contact-info-label">Instagram</p>
+                            <p class="contact-info-value">@flowinglab.official</p>
+                        </div>
+                        <div class="contact-info-item">
+                            <p class="contact-info-label">Location</p>
+                            <p class="contact-info-value">Seoul, Korea</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Progress -->
+    <div class="progress" id="progress">
+        <span class="progress-current" id="progressCurrent">01</span>
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+        <span class="progress-total">/ 08</span>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer" id="footer">
+        <span class="footer-text">© FLOWINGLAB</span>
+        <div class="footer-socials">
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">YT</a>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/cursor.js"></script>
+    <script src="js/intro.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

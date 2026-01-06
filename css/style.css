@@ -1,0 +1,1264 @@
+/* ========================================
+   FLOWINGLAB - Main Stylesheet
+   ======================================== */
+
+/* CSS Variables */
+:root {
+    --black: #0a0a0a;
+    --white: #f5f5f5;
+    --accent: #ff3d00;
+    --gray: #888;
+    --light-gray: #1a1a1a;
+}
+
+/* ========================================
+   Reset & Base Styles
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--black);
+    color: var(--white);
+    font-weight: 300;
+    line-height: 1.7;
+    cursor: none;
+}
+
+/* ========================================
+   Custom Cursor
+   ======================================== */
+
+.cursor {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--white);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10001;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+    transform: translate(-50%, -50%);
+}
+
+.cursor-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 10002;
+    transform: translate(-50%, -50%);
+}
+
+.cursor.hover {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 61, 0, 0.1);
+    border-color: var(--accent);
+}
+
+/* ========================================
+   Intro Curtain Animation
+   ======================================== */
+
+.intro-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.curtain-top, .curtain-bottom {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background: var(--black);
+    transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.curtain-top {
+    top: 0;
+}
+
+.curtain-bottom {
+    bottom: 0;
+}
+
+.intro-curtain.open .curtain-top {
+    transform: translateY(-100%);
+}
+
+.intro-curtain.open .curtain-bottom {
+    transform: translateY(100%);
+}
+
+.intro-logo {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 8px;
+    opacity: 1;
+    transition: opacity 0.5s ease 0.8s;
+}
+
+.intro-curtain.open .intro-logo {
+    opacity: 0;
+}
+
+/* ========================================
+   Noise Overlay
+   ======================================== */
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1000;
+}
+
+/* ========================================
+   Header
+   ======================================== */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px 48px;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: all 0.8s ease 1.5s;
+}
+
+header.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 20px;
+    letter-spacing: 4px;
+    color: var(--white);
+}
+
+.nav-menu {
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    position: relative;
+    padding-bottom: 4px;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--accent);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ========================================
+   Horizontal Container
+   ======================================== */
+
+.horizontal-wrapper {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.horizontal-container {
+    display: flex;
+    height: 100vh;
+    transition: transform 1s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.section {
+    min-width: 100vw;
+    height: 100vh;
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+}
+
+/* ========================================
+   Hero Section
+   ======================================== */
+
+.hero-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #111 0%, #0a0a0a 50%, #111 100%);
+}
+
+.hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(60px, 15vw, 200px);
+    letter-spacing: 8px;
+    line-height: 0.9;
+    overflow: hidden;
+}
+
+.hero-title span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-title.show span {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-title span:nth-child(2) {
+    transition-delay: 0.1s;
+}
+
+.hero-tagline {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(24px, 4vw, 48px);
+    letter-spacing: 12px;
+    margin-top: 24px;
+    color: var(--accent);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.8s ease 0.4s;
+}
+
+.hero-tagline.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hero-sub {
+    font-size: 13px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 40px;
+    opacity: 0;
+    transition: opacity 0.8s ease 0.6s;
+}
+
+.hero-sub.show {
+    opacity: 1;
+}
+
+.hero-scroll {
+    position: absolute;
+    bottom: 48px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.8s ease 1s;
+}
+
+.hero-scroll.show {
+    opacity: 1;
+}
+
+.hero-scroll-text {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+}
+
+.hero-scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gray), transparent);
+    animation: scrollLine 2s ease infinite;
+}
+
+@keyframes scrollLine {
+    0%, 100% { transform: scaleY(1); opacity: 1; }
+    50% { transform: scaleY(0.5); opacity: 0.5; }
+}
+
+/* ========================================
+   About Section
+   ======================================== */
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.about-left {
+    padding: 120px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    background: var(--black);
+    z-index: 2;
+}
+
+.about-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: all 0.6s ease;
+}
+
+.about-label.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.about-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 5vw, 56px);
+    letter-spacing: 2px;
+    line-height: 1.1;
+    margin-bottom: 32px;
+}
+
+.about-title .line {
+    display: block;
+    overflow: hidden;
+}
+
+.about-title .line span {
+    display: inline-block;
+    transform: translateY(100%);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.about-title.show .line span {
+    transform: translateY(0);
+}
+
+.about-title .line:nth-child(2) span {
+    transition-delay: 0.1s;
+}
+
+.about-title .line:nth-child(3) span {
+    transition-delay: 0.2s;
+}
+
+.about-desc {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.9;
+    margin-bottom: 16px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease 0.3s;
+}
+
+.about-desc.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.about-right {
+    background: var(--light-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.about-images {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.about-image {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.about-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, var(--accent) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.about-image:hover::before {
+    opacity: 0.2;
+}
+
+.image-placeholder {
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+}
+
+/* ========================================
+   Business Section
+   ======================================== */
+
+.business-section {
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
+    background: #f5f5f5;
+    color: var(--black);
+}
+
+.business-wrapper {
+    width: 100%;
+}
+
+.business-header {
+    margin-bottom: 80px;
+}
+
+.business-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.business-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 100px);
+    letter-spacing: 4px;
+    line-height: 1;
+}
+
+.business-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+.business-card {
+    padding: 48px 36px;
+    background: var(--black);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.4s ease;
+}
+
+.business-card:hover {
+    transform: translateY(-12px);
+}
+
+.business-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease;
+}
+
+.business-card:hover::before {
+    transform: scaleX(1);
+}
+
+.business-card-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: var(--light-gray);
+    line-height: 1;
+    margin-bottom: 24px;
+    transition: color 0.3s;
+}
+
+.business-card:hover .business-card-number {
+    color: var(--accent);
+}
+
+.business-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 16px;
+}
+
+.business-card-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+}
+
+.business-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.business-card-tag {
+    padding: 6px 12px;
+    font-size: 10px;
+    letter-spacing: 1px;
+    border: 1px solid #333;
+    color: var(--gray);
+}
+
+/* ========================================
+   Branding Section
+   ======================================== */
+
+.branding-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.branding-left {
+    background: var(--accent);
+    padding: 120px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.branding-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: rgba(0,0,0,0.5);
+    margin-bottom: 24px;
+}
+
+.branding-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 4px;
+    color: var(--black);
+    line-height: 1;
+    margin-bottom: 32px;
+}
+
+.branding-desc {
+    font-size: 15px;
+    color: rgba(0,0,0,0.7);
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+.branding-services {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.branding-service {
+    padding: 12px 24px;
+    background: var(--black);
+    color: var(--white);
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.branding-right {
+    background: var(--black);
+    display: flex;
+    flex-direction: column;
+}
+
+.branding-image {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--light-gray);
+    position: relative;
+    overflow: hidden;
+}
+
+.branding-image:last-child {
+    border-bottom: none;
+}
+
+.branding-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateX(-100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.branding-image:hover::before {
+    transform: translateX(100%);
+}
+
+/* ========================================
+   Commerce Section
+   ======================================== */
+
+.commerce-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.commerce-left {
+    background: var(--light-gray);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+}
+
+.commerce-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+}
+
+.commerce-image:hover {
+    background: #222;
+}
+
+.commerce-right {
+    background: var(--black);
+    padding: 120px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.commerce-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.commerce-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 32px;
+}
+
+.commerce-desc {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.9;
+    margin-bottom: 40px;
+}
+
+.commerce-list {
+    list-style: none;
+}
+
+.commerce-list li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--light-gray);
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s, padding-left 0.3s;
+}
+
+.commerce-list li:hover {
+    color: var(--accent);
+    padding-left: 8px;
+}
+
+.commerce-list li::before {
+    content: '→';
+    color: var(--accent);
+}
+
+/* ========================================
+   MCN/Partnership Section
+   ======================================== */
+
+.mcn-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.mcn-header {
+    padding: 120px 80px 60px;
+    background: var(--black);
+}
+
+.mcn-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+}
+
+.mcn-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 8vw, 80px);
+    letter-spacing: 4px;
+}
+
+.mcn-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--light-gray);
+}
+
+.mcn-card {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.mcn-card:hover {
+    background: #222;
+}
+
+.mcn-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 50%, rgba(0,0,0,0.8));
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.mcn-card:hover .mcn-card-overlay {
+    opacity: 1;
+}
+
+.mcn-card-info {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.4s;
+}
+
+.mcn-card:hover .mcn-card-info {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.mcn-card-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18px;
+    letter-spacing: 2px;
+}
+
+.mcn-card-role {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+/* ========================================
+   Portfolio Section
+   ======================================== */
+
+.portfolio-section {
+    display: grid;
+    grid-template-columns: 400px 1fr;
+}
+
+.portfolio-left {
+    background: var(--black);
+    padding: 120px 48px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-right: 1px solid var(--light-gray);
+}
+
+.portfolio-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.portfolio-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 4px;
+    margin-bottom: 24px;
+}
+
+.portfolio-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 40px;
+}
+
+.portfolio-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 28px;
+    border: 1px solid var(--white);
+    color: var(--white);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.portfolio-btn:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+}
+
+.portfolio-item {
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--black);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+}
+
+.portfolio-item:hover {
+    background: #222;
+}
+
+.portfolio-item-overlay {
+    position: absolute;
+    inset: 0;
+    background: var(--accent);
+    transform: translateY(100%);
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.portfolio-item:hover .portfolio-item-overlay {
+    transform: translateY(0);
+}
+
+.portfolio-item-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 24px;
+    letter-spacing: 4px;
+    color: var(--black);
+}
+
+/* ========================================
+   Contact Section
+   ======================================== */
+
+.contact-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(200px, 40vw, 600px);
+    color: var(--light-gray);
+    opacity: 0.3;
+    white-space: nowrap;
+}
+
+.contact-wrapper {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+    padding: 0 40px;
+}
+
+.contact-label {
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+}
+
+.contact-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(56px, 12vw, 140px);
+    letter-spacing: 4px;
+    line-height: 1;
+    margin-bottom: 24px;
+}
+
+.contact-title .outline {
+    -webkit-text-stroke: 1px var(--white);
+    color: transparent;
+}
+
+.contact-desc {
+    font-size: 16px;
+    color: var(--gray);
+    margin-bottom: 48px;
+}
+
+.contact-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-bottom: 60px;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 18px 36px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-btn.primary {
+    background: var(--accent);
+    color: var(--white);
+}
+
+.contact-btn.primary:hover {
+    transform: translateX(8px);
+}
+
+.contact-btn.secondary {
+    background: transparent;
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.contact-btn.secondary:hover {
+    background: var(--white);
+    color: var(--black);
+}
+
+.contact-info {
+    display: flex;
+    gap: 60px;
+    justify-content: center;
+    padding-top: 40px;
+    border-top: 1px solid var(--light-gray);
+}
+
+.contact-info-item {
+    text-align: center;
+}
+
+.contact-info-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+
+.contact-info-value {
+    font-size: 14px;
+}
+
+/* ========================================
+   Progress Indicator
+   ======================================== */
+
+.progress {
+    position: fixed;
+    bottom: 40px;
+    left: 48px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.8s ease 1.5s;
+}
+
+.progress.show {
+    opacity: 1;
+}
+
+.progress-current {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+.progress-bar {
+    width: 100px;
+    height: 2px;
+    background: var(--light-gray);
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent);
+    width: 12.5%;
+    transition: width 0.8s cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+.progress-total {
+    font-size: 12px;
+    color: var(--gray);
+}
+
+/* ========================================
+   Footer
+   ======================================== */
+
+.footer {
+    position: fixed;
+    bottom: 40px;
+    right: 48px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.8s ease 1.5s;
+}
+
+.footer.show {
+    opacity: 1;
+}
+
+.footer-text {
+    font-size: 11px;
+    color: var(--gray);
+}
+
+.footer-socials {
+    display: flex;
+    gap: 8px;
+}
+
+.social-link {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: var(--gray);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.social-link:hover {
+    border-color: var(--white);
+    color: var(--white);
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+
+@media (max-width: 1200px) {
+    .business-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .mcn-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .portfolio-section {
+        grid-template-columns: 1fr;
+    }
+
+    .portfolio-left {
+        padding: 100px 40px 40px;
+        border-right: none;
+    }
+
+    .portfolio-grid {
+        display: none;
+    }
+}
+
+@media (max-width: 900px) {
+    header {
+        padding: 20px 24px;
+    }
+
+    .nav-menu {
+        display: none;
+    }
+
+    .about-section,
+    .branding-section,
+    .commerce-section {
+        grid-template-columns: 1fr;
+    }
+
+    .about-right,
+    .branding-right,
+    .commerce-left {
+        display: none;
+    }
+
+    .about-left,
+    .branding-left,
+    .commerce-right {
+        padding: 100px 24px;
+    }
+
+    .business-section {
+        padding: 100px 24px;
+    }
+
+    .mcn-header {
+        padding: 100px 24px 40px;
+    }
+
+    .mcn-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-buttons {
+        flex-direction: column;
+    }
+
+    .contact-info {
+        flex-direction: column;
+        gap: 24px;
+    }
+
+    .progress {
+        left: 24px;
+    }
+
+    .footer {
+        display: none;
+    }
+
+    .cursor, .cursor-dot {
+        display: none;
+    }
+}
