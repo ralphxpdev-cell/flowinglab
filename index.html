@@ -46,18 +46,31 @@
 
             <!-- 1. Hero -->
             <section class="section hero-section">
-                <div class="hero-bg">
-                    <div class="hero-bg-image">
-                        <span class="image-placeholder">Background Video / Image</span>
+                <!-- Left: Content -->
+                <div class="hero-left">
+                    <div class="hero-content">
+                        <h1 class="hero-title" id="heroTitle">
+                            <span>FLOWING</span><span>LAB</span>
+                        </h1>
+                        <p class="hero-tagline" id="heroTagline">Let us flow</p>
+                        <p class="hero-sub" id="heroSub">Branding · Commerce · MCN</p>
                     </div>
                 </div>
-                <div class="hero-content">
-                    <h1 class="hero-title" id="heroTitle">
-                        <span>FLOWING</span><span>LAB</span>
-                    </h1>
-                    <p class="hero-tagline" id="heroTagline">Let us flow</p>
-                    <p class="hero-sub" id="heroSub">Branding · Commerce · MCN</p>
+
+                <!-- Right: Video -->
+                <div class="hero-right">
+                    <video
+                        class="hero-video"
+                        id="heroVideo"
+                        autoplay
+                        muted
+                        loop
+                        playsinline
+                        poster="">
+                        <source src="https://ahlnjjqmuoewsxuzppzt.supabase.co/storage/v1/object/public/video/hero.mp4" type="video/mp4">
+                    </video>
                 </div>
+
                 <div class="hero-scroll" id="heroScroll">
                     <span class="hero-scroll-text">Scroll</span>
                     <div class="hero-scroll-line"></div>
