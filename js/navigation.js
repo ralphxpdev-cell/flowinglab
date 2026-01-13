@@ -1,6 +1,7 @@
 /**
  * Navigation Module
- * Handles horizontal section scrolling and navigation
+ * Handles horizontal section scrolling and navigation (desktop)
+ * Allows natural vertical scrolling on mobile
  */
 
 (function() {
@@ -17,16 +18,29 @@
     const totalSections = sections.length;
 
     /**
+     * Check if mobile device
+     */
+    function isMobile() {
+        return window.innerWidth <= 900;
+    }
+
+    /**
      * Navigate to specific section
      * @param {number} index - Section index to navigate to
      */
     function goToSection(index) {
         if (index < 0 || index >= totalSections || isScrolling) return;
 
+        // On mobile, scroll to section naturally
+        if (isMobile()) {
+            sections[index].scrollIntoView({ behavior: 'smooth' });
+            return;
+        }
+
         isScrolling = true;
         currentIndex = index;
 
-        // Translate container
+        // Translate container (desktop only)
         const translateX = -index * 100;
         container.style.transform = `translateX(${translateX}vw)`;
 
@@ -46,9 +60,11 @@
     }
 
     /**
-     * Mouse wheel navigation
+     * Mouse wheel navigation (desktop only)
      */
     document.addEventListener('wheel', (e) => {
+        if (isMobile()) return; // Allow natural scroll on mobile
+
         e.preventDefault();
         if (isScrolling) return;
 
@@ -60,25 +76,35 @@
     }, { passive: false });
 
     /**
-     * Touch navigation
+     * Touch navigation (desktop horizontal swipe only)
      */
     let touchStartX = 0;
+    let touchStartY = 0;
+
     document.addEventListener('touchstart', (e) => {
         touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
     });
 
     document.addEventListener('touchend', (e) => {
+        if (isMobile()) return; // Allow natural scroll on mobile
         if (isScrolling) return;
-        const diff = touchStartX - e.changedTouches[0].clientX;
-        if (Math.abs(diff) > 50) {
-            goToSection(diff > 0 ? currentIndex + 1 : currentIndex - 1);
+
+        const diffX = touchStartX - e.changedTouches[0].clientX;
+        const diffY = touchStartY - e.changedTouches[0].clientY;
+
+        // Only respond to horizontal swipes
+        if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+            goToSection(diffX > 0 ? currentIndex + 1 : currentIndex - 1);
         }
     });
 
     /**
-     * Keyboard navigation
+     * Keyboard navigation (desktop only)
      */
     document.addEventListener('keydown', (e) => {
+        if (isMobile()) return;
+
         if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
             goToSection(currentIndex + 1);
         }
