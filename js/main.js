@@ -107,43 +107,8 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 (IO 호환 — window.scrollTo 방식) ──
-(function () {
-  if ('ontouchstart' in window) return;
-  if (window.innerWidth < 768) return;
-
-  let target = 0;
-  let current = 0;
-  let rafId = null;
-
-  window.addEventListener('wheel', e => {
-    e.preventDefault();
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    target += e.deltaY;
-    target = Math.max(0, Math.min(target, maxScroll));
-    if (!rafId) tick();
-  }, { passive: false });
-
-  function tick() {
-    current += (target - current) * 0.18;
-    if (Math.abs(target - current) < 0.5) {
-      current = target;
-      window.scrollTo(0, current);
-      rafId = null;
-      return;
-    }
-    window.scrollTo(0, current);
-    rafId = requestAnimationFrame(tick);
-  }
-
-  // 네이티브 스크롤과 동기화 (앵커 클릭 등)
-  window.addEventListener('scroll', () => {
-    if (!rafId) {
-      target = window.scrollY;
-      current = window.scrollY;
-    }
-  }, { passive: true });
-})();
+// ── 스크롤: 네이티브 사용 (IO 호환 보장) ──
+// CSS html { scroll-behavior: smooth } 로 부드러운 앵커 이동 처리
 
 // ── Smooth anchor scroll ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
