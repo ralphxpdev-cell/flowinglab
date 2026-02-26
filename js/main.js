@@ -119,13 +119,13 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   window.addEventListener('wheel', e => {
     e.preventDefault();
     const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    target += e.deltaY * 0.85;
+    target += e.deltaY;
     target = Math.max(0, Math.min(target, maxScroll));
     if (!rafId) tick();
   }, { passive: false });
 
   function tick() {
-    current += (target - current) * 0.08;
+    current += (target - current) * 0.18;
     if (Math.abs(target - current) < 0.5) {
       current = target;
       window.scrollTo(0, current);
