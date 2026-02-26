@@ -1,19 +1,48 @@
-// ── Intro ──
-const chars = document.querySelectorAll('.ic');
-chars.forEach((c, i) => {
+// ── Intro (폰트 로딩 후 실행 — 검정화면 방지) ──
+let introRan = false;
+function runIntro() {
+  if (introRan) return;
+  introRan = true;
+
+  const chars = document.querySelectorAll('.ic');
+  const intro = document.getElementById('intro');
+  const page = document.getElementById('page');
+  if (!chars.length || !intro || !page) return;
+
+  chars.forEach((c, i) => {
+    setTimeout(() => {
+      c.style.transition = 'transform .55s cubic-bezier(.16,1,.3,1),opacity .45s ease';
+      c.style.transform = 'translateY(0)';
+      c.style.opacity = '1';
+    }, 180 + i * 55);
+  });
   setTimeout(() => {
-    c.style.transition = 'transform .55s cubic-bezier(.16,1,.3,1),opacity .45s ease';
-    c.style.transform = 'translateY(0)';
-    c.style.opacity = '1';
-  }, 180 + i * 55);
-});
+    intro.classList.add('out');
+    setTimeout(() => {
+      intro.style.display = 'none';
+      page.classList.add('show');
+    }, 600);
+  }, 180 + chars.length * 55 + 900);
+}
+
+// 폰트가 로드되면 인트로 시작, 2초 안에 안 되면 강제 시작
+if (document.fonts && document.fonts.ready) {
+  Promise.race([
+    document.fonts.ready,
+    new Promise(r => setTimeout(r, 2000))
+  ]).then(runIntro);
+} else {
+  window.addEventListener('load', runIntro);
+}
+// 최후 안전장치 — 5초 후에도 인트로가 안 끝났으면 강제 스킵
 setTimeout(() => {
-  document.getElementById('intro').classList.add('out');
-  setTimeout(() => {
-    document.getElementById('intro').style.display = 'none';
-    document.getElementById('page').classList.add('show');
-  }, 600);
-}, 180 + chars.length * 55 + 900);
+  const intro = document.getElementById('intro');
+  const page = document.getElementById('page');
+  if (intro && intro.style.display !== 'none') {
+    intro.style.display = 'none';
+    if (page) page.classList.add('show');
+  }
+}, 5000);
 
 // ── Portfolio stagger ──
 const pItems = document.querySelectorAll('.project-item');
@@ -78,47 +107,45 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 ──
+// ── 스크롤 관성 (IO 호환 — window.scrollTo 방식) ──
 (function () {
-  let current = 0, target = 0, ease = 0.08;
-
   if ('ontouchstart' in window) return;
   if (window.innerWidth < 768) return;
 
-  document.body.style.position = 'fixed';
-  document.body.style.width = '100%';
-  document.body.style.top = '0';
-  document.body.style.left = '0';
-  document.documentElement.style.overflow = 'hidden';
-
-  const scrollHeight = () => document.body.scrollHeight - window.innerHeight;
+  let target = 0;
+  let current = 0;
+  let rafId = null;
 
   window.addEventListener('wheel', e => {
+    e.preventDefault();
+    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
     target += e.deltaY * 0.85;
-    target = Math.max(0, Math.min(target, scrollHeight()));
-  }, { passive: true });
+    target = Math.max(0, Math.min(target, maxScroll));
+    if (!rafId) tick();
+  }, { passive: false });
 
-  function update() {
-    current += (target - current) * ease;
-    if (Math.abs(target - current) < 0.5) current = target;
-    document.body.style.transform = `translateY(${-current}px)`;
-    window.dispatchEvent(new CustomEvent('scroll'));
-    requestAnimationFrame(update);
+  function tick() {
+    current += (target - current) * 0.08;
+    if (Math.abs(target - current) < 0.5) {
+      current = target;
+      window.scrollTo(0, current);
+      rafId = null;
+      return;
+    }
+    window.scrollTo(0, current);
+    rafId = requestAnimationFrame(tick);
   }
-  update();
 
-  document.querySelectorAll('a[href^="#"]').forEach(a => {
-    a.addEventListener('click', e => {
-      const el = document.querySelector(a.getAttribute('href'));
-      if (!el) return;
-      e.preventDefault();
-      const rect = el.getBoundingClientRect();
-      target = Math.max(0, Math.min(current + rect.top, scrollHeight()));
-    });
-  });
+  // 네이티브 스크롤과 동기화 (앵커 클릭 등)
+  window.addEventListener('scroll', () => {
+    if (!rafId) {
+      target = window.scrollY;
+      current = window.scrollY;
+    }
+  }, { passive: true });
 })();
 
-// ── Smooth scroll fallback ──
+// ── Smooth anchor scroll ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));

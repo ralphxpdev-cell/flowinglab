@@ -34,8 +34,8 @@ body.cursor-hover #cursor-ring{width:52px;height:52px;border-color:rgba(233,67,2
 body{background:var(--black);color:var(--white);font-family:var(--fb);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ─── INTRO ─── */
-#intro{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none}
-.ic{font-family:var(--fd);font-size:clamp(3rem,8vw,7rem);letter-spacing:.06em;display:inline-block;transform:translateY(110%);opacity:0}
+#intro{position:fixed;inset:0;background:var(--black);z-index:9999;display:flex;align-items:center;justify-content:center;pointer-events:none;overflow:hidden}
+.ic{font-family:var(--fd);font-size:clamp(3rem,8vw,7rem);letter-spacing:.06em;display:inline-block;transform:translateY(110%);opacity:0;color:var(--white)}
 .ic.dot{color:var(--red)}
 #intro.out{animation:iFade .6s ease forwards}
 @keyframes iFade{to{opacity:0;visibility:hidden}}
