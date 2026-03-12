@@ -107,41 +107,48 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 (모멘텀) ──
+// ── 스크롤 관성 (transform 방식 — GPU 즉시반응, 딜레이 없음) ──
 (function () {
   if ('ontouchstart' in window) return;
   if (window.innerWidth < 768) return;
 
-  const FRICTION = 0.80; // 마찰력. 낮을수록 빨리 멈춤 (0.75~0.88)
-  const STRENGTH = 0.14; // 입력 강도. 낮을수록 무거움 (0.1~0.2)
+  const page = document.getElementById('page');
+  if (!page) return;
 
-  let velocity = 0;
-  let current = window.scrollY;
-  const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
+  // #page 고정 배치 (transform으로 이동)
+  page.style.cssText += ';position:fixed;top:0;left:0;width:100%;will-change:transform;';
 
-  window.addEventListener('wheel', e => {
-    e.preventDefault();
-    velocity += e.deltaY * STRENGTH;
-  }, { passive: false });
+  // body 높이 = 실제 콘텐츠 높이 (스크롤바 생성용)
+  function syncHeight() {
+    document.body.style.height = page.offsetHeight + 'px';
+  }
+  syncHeight();
+  window.addEventListener('resize', syncHeight, { passive: true });
+
+  let target = 0;
+  let current = 0;
+
+  // 네이티브 스크롤(키보드·스크롤바)로 target 업데이트
+  window.addEventListener('scroll', () => {
+    target = window.scrollY;
+  }, { passive: true });
 
   (function tick() {
-    velocity *= FRICTION;
-    current = Math.max(0, Math.min(current + velocity, maxScroll()));
-    window.scrollTo(0, current);
+    current += (target - current) * 0.1;
+    page.style.transform = `translateY(${-current}px)`;
     requestAnimationFrame(tick);
   })();
-
-  // 키보드·스크롤바 등 네이티브 스크롤과 동기화
-  window.addEventListener('scroll', () => {
-    if (Math.abs(velocity) < 0.5) current = window.scrollY;
-  }, { passive: true });
 })();
 
 // ── Smooth anchor scroll ──
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+    if (!t) return;
+    e.preventDefault();
+    // transform 환경: 요소의 자연 위치 = 현재 시각 위치 + 현재 스크롤
+    const targetY = t.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: targetY, behavior: 'instant' });
   });
 });
 
