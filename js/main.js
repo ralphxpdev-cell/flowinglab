@@ -107,21 +107,27 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 (Lenis — 에이전시 무거운 느낌) ──
+// ── 스크롤 관성 ──
 (function () {
-  if (typeof Lenis === 'undefined') return;
+  if ('ontouchstart' in window) return;
+  if (window.innerWidth < 768) return;
 
-  const lenis = new Lenis({
-    lerp: 0.08,         // 낮을수록 무거움. 0.06~0.12 권장
-    smoothWheel: true,
-    touchMultiplier: 0,
-  });
+  let target = window.scrollY;
+  let current = window.scrollY;
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
+  window.addEventListener('wheel', e => {
+    e.preventDefault();
+    target = Math.max(0, Math.min(
+      target + e.deltaY,
+      document.documentElement.scrollHeight - window.innerHeight
+    ));
+  }, { passive: false });
+
+  (function tick() {
+    current += (target - current) * 0.1;
+    window.scrollTo(0, current);
+    requestAnimationFrame(tick);
+  })();
 })();
 
 // ── Smooth anchor scroll ──
