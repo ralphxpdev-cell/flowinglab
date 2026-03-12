@@ -112,8 +112,7 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   if (typeof Lenis === 'undefined') return;
 
   const lenis = new Lenis({
-    duration: 1.1,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo out: 즉시 반응 + 끝에서 부드럽게 감속
+    lerp: 0.08,         // 낮을수록 무거움. 0.06~0.12 권장
     smoothWheel: true,
     touchMultiplier: 0,
   });
