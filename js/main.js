@@ -107,41 +107,22 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 (살짝 무거운 느낌) ──
+// ── 스크롤 관성 (Lenis — 에이전시 무거운 느낌) ──
 (function () {
-  if ('ontouchstart' in window) return;
-  if (window.innerWidth < 768) return;
+  if (typeof Lenis === 'undefined') return;
 
-  let target = window.scrollY;
-  let current = window.scrollY;
-  let rafId = null;
+  const lenis = new Lenis({
+    duration: 1.4,
+    easing: t => 1 - Math.pow(1 - t, 4),
+    smoothWheel: true,
+    touchMultiplier: 0, // 모바일 터치는 네이티브 그대로
+  });
 
-  window.addEventListener('wheel', e => {
-    e.preventDefault();
-    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-    target += e.deltaY;
-    target = Math.max(0, Math.min(target, maxScroll));
-    if (!rafId) tick();
-  }, { passive: false });
-
-  function tick() {
-    current += (target - current) * 0.45;
-    if (Math.abs(target - current) < 0.5) {
-      current = target;
-      window.scrollTo(0, current);
-      rafId = null;
-      return;
-    }
-    window.scrollTo(0, current);
-    rafId = requestAnimationFrame(tick);
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
   }
-
-  window.addEventListener('scroll', () => {
-    if (!rafId) {
-      target = window.scrollY;
-      current = window.scrollY;
-    }
-  }, { passive: true });
+  requestAnimationFrame(raf);
 })();
 
 // ── Smooth anchor scroll ──
