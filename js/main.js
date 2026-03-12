@@ -112,10 +112,10 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   if (typeof Lenis === 'undefined') return;
 
   const lenis = new Lenis({
-    duration: 1.4,
-    easing: t => 1 - Math.pow(1 - t, 4),
+    duration: 1.1,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // expo out: 즉시 반응 + 끝에서 부드럽게 감속
     smoothWheel: true,
-    touchMultiplier: 0, // 모바일 터치는 네이티브 그대로
+    touchMultiplier: 0,
   });
 
   function raf(time) {
