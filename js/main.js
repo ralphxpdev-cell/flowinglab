@@ -107,27 +107,34 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   document.addEventListener('mouseenter', () => { dot.style.opacity = '1'; ring.style.opacity = '1'; });
 })();
 
-// ── 스크롤 관성 ──
+// ── 스크롤 관성 (모멘텀) ──
 (function () {
   if ('ontouchstart' in window) return;
   if (window.innerWidth < 768) return;
 
-  let target = window.scrollY;
+  const FRICTION = 0.80; // 마찰력. 낮을수록 빨리 멈춤 (0.75~0.88)
+  const STRENGTH = 0.14; // 입력 강도. 낮을수록 무거움 (0.1~0.2)
+
+  let velocity = 0;
   let current = window.scrollY;
+  const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
 
   window.addEventListener('wheel', e => {
     e.preventDefault();
-    target = Math.max(0, Math.min(
-      target + e.deltaY,
-      document.documentElement.scrollHeight - window.innerHeight
-    ));
+    velocity += e.deltaY * STRENGTH;
   }, { passive: false });
 
   (function tick() {
-    current += (target - current) * 0.1;
+    velocity *= FRICTION;
+    current = Math.max(0, Math.min(current + velocity, maxScroll()));
     window.scrollTo(0, current);
     requestAnimationFrame(tick);
   })();
+
+  // 키보드·스크롤바 등 네이티브 스크롤과 동기화
+  window.addEventListener('scroll', () => {
+    if (Math.abs(velocity) < 0.5) current = window.scrollY;
+  }, { passive: true });
 })();
 
 // ── Smooth anchor scroll ──
