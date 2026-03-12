@@ -1,11 +1,11 @@
-# FLOWINGLAB - Company Website
+# TOMOB - Company Website
 
-브랜딩, 커머스, MCN을 아우르는 크리에이티브 그룹 플로잉랩의 웹사이트
+브랜딩, 웹사이트, 마케팅을 아우르는 AI 에이전시 토모브의 웹사이트
 
 ## 프로젝트 구조
 
 ```
-flowinglab/
+tomob/
 ├── index.html              # 메인 HTML 파일
 ├── css/
 │   └── style.css          # 전체 스타일시트
@@ -103,4 +103,4 @@ flowinglab/
 
 ## 라이선스
 
-© FLOWINGLAB - All rights reserved
+© TOMOB - All rights reserved

@@ -152,7 +152,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// ── FLOWING 02: 펼침 → 수렴 → 3시 발사 루프 ──
+// ── TOMOB 02: 펼침 → 수렴 → 3시 발사 루프 ──
 (function () {
   const svg = document.getElementById('radiate-lines');
   const wrap = document.getElementById('radiate-svg');
