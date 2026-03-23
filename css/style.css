@@ -533,4 +533,7 @@ footer{background:#060606;border-top:1px solid var(--g2);padding:64px 60px 48px}
   .proc-grid{grid-template-columns:1fr}
   .cta-contacts{flex-direction:column;gap:32px}
   .fi{grid-template-columns:1fr}
+  .rv{opacity:1!important;transform:none!important}
+  .project-item{opacity:1!important;transform:none!important}
+  .proc-item{opacity:1!important;transform:none!important}
 }
