@@ -302,6 +302,7 @@ nav::before{content:'';position:absolute;inset:0;background:rgba(10,10,10,.9);ba
 .vis-grid-item{
   aspect-ratio:1;border-radius:10px;
   background:var(--g2);border:1px solid var(--g3);
+  background-size:cover;background-position:center;
   display:flex;align-items:flex-end;justify-content:flex-start;
   padding:8px;overflow:hidden;position:relative;
 }
