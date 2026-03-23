@@ -124,6 +124,10 @@ document.querySelectorAll('#procGrid .proc-item').forEach(el => pio.observe(el))
   }
   syncHeight();
   window.addEventListener('resize', syncHeight, { passive: true });
+  window.addEventListener('load', syncHeight);
+  // 이미지/비디오 로딩 후 높이 변경 감지
+  const _ro = new ResizeObserver(syncHeight);
+  _ro.observe(page);
 
   let target = 0;
   let current = 0;

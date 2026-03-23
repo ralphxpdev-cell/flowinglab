@@ -237,27 +237,10 @@ nav::before{content:'';position:absolute;inset:0;background:rgba(10,10,10,.9);ba
   object-fit:cover;
   border-radius:12px;
 }
-.video-placeholder{
+.pain-video{
   width:100%;
-  aspect-ratio:16/10;
   border-radius:12px;
-  background:var(--g2);
-  border:1px dashed var(--g4);
-  display:flex;align-items:center;justify-content:center;
-}
-.video-placeholder-inner{
-  display:flex;flex-direction:column;align-items:center;gap:10px;
-}
-.video-icon{
-  font-size:2rem;color:var(--g5);
-  width:56px;height:56px;
-  border:1px solid var(--g4);border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  padding-left:4px;
-}
-.video-label{
-  font-family:var(--fm);font-size:.6rem;letter-spacing:.16em;
-  color:var(--g5);
+  display:block;
 }
 .vis-circles{
   width:100%;max-width:460px;
